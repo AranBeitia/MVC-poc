@@ -1,5 +1,4 @@
 <?php
-
 require_once MODELS . "employeeModel.php";
 
 //OBTAIN THE ACCION PASSED IN THE URL AND EXECUTE IT AS A FUNCTION
@@ -7,7 +6,17 @@ require_once MODELS . "employeeModel.php";
 //Keep in mind that the function to be executed has to be one of the ones declared in this controller
 // TODO Implement the logic
 
+$action = "";
 
+if(isset($_GET["action"])) {
+  $action = $_GET["action"];
+}
+
+if(function_exists($action)) {
+  call_user_func(($action)); // $action tiene el mismo nobre de la funcion getAllEmployees()
+} else {
+  error("La función que intentas llamar no existe");
+}
 /* ~~~ CONTROLLER FUNCTIONS ~~~ */
 
 /**
@@ -15,7 +24,13 @@ require_once MODELS . "employeeModel.php";
  */
 function getAllEmployees()
 {
-    //
+  $employees = get();
+
+  if(isset($employees)) {
+    require_once VIEWS . "/employee/employeeDashboard.php";
+  } else {
+    error("Ha habido un problema con la base de datos");
+  }
 }
 
 /**
@@ -31,5 +46,5 @@ function getEmployee($request)
  */
 function error($errorMsg)
 {
-    require_once VIEWS . "/error/error.php";
+  require_once VIEWS . "/error/error.php";
 }
