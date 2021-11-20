@@ -271,7 +271,7 @@ function conn()
 }
 ```
 
-### 5.2. `./models/employeeModel.php`
+### 5.2. `./models/employeeModel.php
 
 First, we must require the previous database connection file in order to execute the database queries.
 
