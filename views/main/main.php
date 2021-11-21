@@ -12,8 +12,14 @@
 	<main class="container">
 		<h1>Main view</h1>
 		<div class="list-group">
-			<a class="list-group-item list-group-item-action" href="?controller=customer&action=getAllCustomers">Customer Controller</a>
-			<a class="list-group-item list-group-item-action" href="?controller=hobbie&action=getAllHobbies">Product Controller</a>
+			<a 
+				class="list-group-item list-group-item-action" 
+				href="?controller=customer&action=getAllCustomers"
+			>Customer Controller</a>
+			<a 
+				class="list-group-item list-group-item-action" 
+				href="?controller=product&action=getAllProducts"
+			>Product Controller</a>
 		</div>
 	</main>
 </body>

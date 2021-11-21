@@ -36,8 +36,14 @@
 					<td><?php echo $customer["age"] ?></td>
 					<td><?php echo $customer["phone_number"] ?></td>
 					<td colspan="2">
-						<a class='btn btn-dark' href='?controller=customer&action=getCustomer&id="<?php echo $customer["id"] ?>"'>Edit</a>
-						<a class='btn btn-danger' href='?controller=customer&action=deleteCustomer&id="<?php echo $customer["id"] ?>"'>Delete</a>
+						<a 
+							class='btn btn-dark' 
+							href='?controller=customer&action=getCustomer&id="<?php echo $customer["id"] ?>"'
+						>Create</a>
+						<a 
+							class='btn btn-danger' 
+							href='?controller=customer&action=deleteCustomer&id="<?php echo $customer["id"] ?>"'
+						>Delete</a>
 					</td>
 				</tr>
 			<?php } ?>
