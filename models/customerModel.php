@@ -19,4 +19,17 @@ function get(){
 }
 
 function getById($id){
+	$query = conn()->prepare(
+		"SELECT id, name, email, city, age, phone_number
+		 FROM customers
+		 WHERE id = $id;"
+	);
+
+	try {
+		$query->execute();
+		$customer = $query->fetch();
+		return $customer;
+	} catch (PDOException $e) {
+		return [];
+	}
 }

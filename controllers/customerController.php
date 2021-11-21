@@ -13,7 +13,7 @@ if(isset($_GET["action"])) {
 }
 
 if(function_exists($action)) {
-  call_user_func(($action)); // $action tiene el mismo nobre de la funcion getAllEmployees()
+  call_user_func($action, $_GET); // $action tiene el mismo nobre de la funcion getAllCustomers()
 } else {
   error("La función que intentas llamar no existe");
 }
@@ -22,8 +22,7 @@ if(function_exists($action)) {
 /**
  * This function calls the corresponding model function and includes the corresponding view
  */
-function getAllCustomers()
-{
+function getAllCustomers() {
   $customers = get();
 
   if(isset($customers)) {
@@ -36,15 +35,19 @@ function getAllCustomers()
 /**
  * This function calls the corresponding model function and includes the corresponding view
  */
-function getCustomer($request)
-{
-    //
+function getCustomer($request) {
+  $action = $request["action"];
+  $customer = null;
+
+  if(isset($request["id"])) {
+    $customer = getById($request["id"]);
+  }
+  require_once VIEWS . "/customer/customer.php";
 }
 
 /**
  * This function includes the error view with a message
  */
-function error($errorMsg)
-{
+function error($errorMsg) {
   require_once VIEWS . "/error/error.php";
 }

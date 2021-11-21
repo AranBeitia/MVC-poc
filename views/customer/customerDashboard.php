@@ -10,7 +10,7 @@
 
 <body>
 	<main class="container">
-		<h1>Customer Dashboard page!</h1>
+		<h1>Customers Dashboard page!</h1>
 		<table class="table table-striped">
 			<thead class="table-dark">
 				<tr>
@@ -39,7 +39,7 @@
 						<a 
 							class='btn btn-dark' 
 							href='?controller=customer&action=getCustomer&id="<?php echo $customer["id"] ?>"'
-						>Create</a>
+						>Edit</a>
 						<a 
 							class='btn btn-danger' 
 							href='?controller=customer&action=deleteCustomer&id="<?php echo $customer["id"] ?>"'

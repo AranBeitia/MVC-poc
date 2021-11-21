@@ -9,7 +9,7 @@
 </head>
 <body>
 	<main class="container">
-	<h1>Product view</h1>
+	<h1>Products dashboard page</h1>
 	<table class="table table-striped">
 			<thead class="table-dark">
 				<tr>
@@ -31,7 +31,7 @@
 					<td><?php echo $product["stock"] ?> ut.</td>
 					<td colspan="2">
 						<a 
-							href='?controller=product&action=editProduct&id="<?php echo $product["id"]?>"' 
+							href='?controller=product&action=getProduct&id="<?php echo $product["id"]?>"' 
 							class="btn btn-dark"
 						>Edit</a>
 						<a 

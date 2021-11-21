@@ -18,5 +18,17 @@ function get() {
 }
 
 function getById($id) {
-	
+	$query = conn()->prepare(
+		"SELECT id, name, category, price, stock
+		 FROM products
+		 WHERE id = $id;"
+	);
+
+	try {
+		$query->execute();
+		$product = $query->fetch();
+		return $product;
+	} catch (PDOException $e) {
+		return [];
+	}
 }

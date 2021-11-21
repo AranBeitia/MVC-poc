@@ -8,7 +8,7 @@ if(isset($_GET["action"])) {
 }
 
 if(function_exists($action)) {
-	call_user_func(($action));
+	call_user_func($action, $_GET);
 } else {
 	error("La función que intentas llamar no existe");
 }
@@ -27,8 +27,14 @@ function deleteProduct($id) {
 	echo 'Deleting...' . $id;
 }
 
-function editProduct($id) {
-	echo 'editing...' . $id;
+function getProduct($request) {
+	$action = $request["id"];
+	$product = null;
+
+	if(isset($request["id"])) {
+		$product = getById($request["id"]);
+	}
+	require_once VIEWS . "/product/product.php";
 }
 
 function createProduct() {
