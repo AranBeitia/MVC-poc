@@ -6,13 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Main view</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-	<h1>Main view</h1>
-	<div class="list-group">
-		<a class="list-group-item list-group-item-action" href="?controller=employee&action=getAllEmployees">Employee Controller</a>
-		<a class="list-group-item list-group-item-action" href="?controller=hobbie&action=getAllHobbies">Hobbie Controller</a>
-</div>
+	<main class="container">
+		<h1>Main view</h1>
+		<div class="list-group">
+			<a class="list-group-item list-group-item-action" href="?controller=employee&action=getAllEmployees">Employee Controller</a>
+			<a class="list-group-item list-group-item-action" href="?controller=hobbie&action=getAllHobbies">Hobbie Controller</a>
+		</div>
+	</main>
 </body>
 </html>
