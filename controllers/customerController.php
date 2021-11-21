@@ -1,5 +1,5 @@
 <?php
-require_once MODELS . "employeeModel.php";
+require_once MODELS . "customerModel.php";
 
 //OBTAIN THE ACCION PASSED IN THE URL AND EXECUTE IT AS A FUNCTION
 
@@ -22,12 +22,12 @@ if(function_exists($action)) {
 /**
  * This function calls the corresponding model function and includes the corresponding view
  */
-function getAllEmployees()
+function getAllCustomers()
 {
-  $employees = get();
+  $customers = get();
 
-  if(isset($employees)) {
-    require_once VIEWS . "/employee/employeeDashboard.php";
+  if(isset($customers)) {
+    require_once VIEWS . "/customer/customerDashboard.php";
   } else {
     error("Ha habido un problema con la base de datos");
   }
@@ -36,7 +36,7 @@ function getAllEmployees()
 /**
  * This function calls the corresponding model function and includes the corresponding view
  */
-function getEmployee($request)
+function getCustomer($request)
 {
     //
 }
