@@ -20,7 +20,7 @@ function get(){
 
 function getById($id){
 	$query = conn()->prepare(
-		"SELECT id, name, email, city, age, phone_number
+		"SELECT id, name, last_name, email, city, age, phone_number, address, country, zip
 		 FROM customers
 		 WHERE id = $id;"
 	);
@@ -31,5 +31,27 @@ function getById($id){
 		return $customer;
 	} catch (PDOException $e) {
 		return [];
+	}
+}
+
+function update($customer) {
+	$query = conn()->prepare(
+		"UPDATE customers
+		 SET name = ?, email = ?, city = ?, age = ?, phone_number = ?
+		 WHERE id = ?;"
+	);
+
+	$query->bindParam(1, $customer["name"]);
+	$query->bindParam(2, $customer["email"]);
+	$query->bindParam(3, $customer["city"]);
+	$query->bindParam(4, $customer["age"]);
+	$query->bindParam(5, $customer["phone_number"]);
+	$query->bindParam(6, $customer["id"]);
+
+	try {
+		$query->execute();
+		return [true];
+	} catch (PDOException $e) {
+		return [false, $e];
 	}
 }

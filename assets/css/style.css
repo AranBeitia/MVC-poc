@@ -1,0 +1,3 @@
+table tbody tr .highlight-cell {
+ box-shadow: inset 0 0 0 9999px grey;
+}

@@ -29,7 +29,7 @@
 					<td><?php echo $product["category"] ?></td>
 					<td><?php echo $product["price"] ?>€</td>
 					<td><?php echo $product["stock"] ?> ut.</td>
-					<td colspan="2">
+					<td>
 						<a 
 							href='?controller=product&action=getProduct&id="<?php echo $product["id"]?>"' 
 							class="btn btn-dark"

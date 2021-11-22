@@ -8,12 +8,12 @@ require_once MODELS . "customerModel.php";
 
 $action = "";
 
-if(isset($_GET["action"])) {
-  $action = $_GET["action"];
+if(isset($_REQUEST["action"])) {
+  $action = $_REQUEST["action"];
 }
 
 if(function_exists($action)) {
-  call_user_func($action, $_GET); // $action tiene el mismo nobre de la funcion getAllCustomers()
+  call_user_func($action, $_REQUEST); // $action tiene el mismo nobre de la funcion getAllCustomers()
 } else {
   error("La función que intentas llamar no existe");
 }
@@ -42,6 +42,30 @@ function getCustomer($request) {
   if(isset($request["id"])) {
     $customer = getById($request["id"]);
   }
+  require_once VIEWS . "/customer/customer.php";
+}
+
+function updateCustomer($request) {
+  $action = $request["action"];
+
+  if(sizeof($_POST) > 0) {
+    $customer = update($_POST);
+
+    if($customer[0]) {
+      header("Location: index.php?controller=customer&action=getAllCustomers");
+    } else {
+      $customer = $_POST;
+      $error = "Data incorrect";
+      require_once VIEWS . "/customer/customer.php";
+    }
+
+  } else {
+    require_once VIEWS . "/customer/customer.php";
+  }
+}
+
+function createCustomer() {
+  echo 'viene de func create...';
   require_once VIEWS . "/customer/customer.php";
 }
 
