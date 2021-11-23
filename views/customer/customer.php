@@ -108,6 +108,17 @@
 				<label for="inputZip" class="form-label">Zip</label>
 				<input type="text" class="form-control" id="inputZip" name="inputZip" value="<?php echo isset($customer["zip"]) ? $customer["zip"] : null ?>">
 			</div>
+			<div class="col-md-6">
+				<label for="inputProduct" class="form-label">Product</label>
+				<select id="inputProduct" name="inputProduct" class="form-select">
+					<option selected>Choose...</option>
+					<option value="1" <?php echo isset($customer["product_id"]) && $customer["roduct_id"] === 1 ? "selected" : null ?>>Bulllit I</option>
+					<option value="2" <?php echo isset($customer["product_id"]) && $customer["product_id"] === 2 ? "selected" : null ?>>Moto 3 I</option>
+					<option value="3" <?php echo isset($customer["product_id"]) && $customer["product_id"] === 3 ? "selected" : null ?>>Snow IV</option>
+					<option value="4" <?php echo isset($customer["product_id"]) && $customer["product_id"] === 4 ? "selected" : null ?>>Street III</option>
+					<option value="5" <?php echo isset($customer["product_id"]) && $customer["product_id"] === 5 ? "selected" : null ?>>Dirt V</option>
+				</select>
+			</div>
 			<div class="col-12">
 				<button type="submit" class="btn btn-dark">Submit</button>
 				<a href="?controller=customer&action=getAllCustomers" class="btn btn-outline-dark">Back</a>

@@ -20,7 +20,7 @@ function get(){
 
 function getById($id){
 	$query = conn()->prepare(
-		"SELECT id, name, last_name, email, city, age, phone_number, address, country, zip
+		"SELECT id, name, last_name, email, city, age, phone_number, address, country, zip, product_id
 		 FROM customers
 		 WHERE id = $id;"
 	);
@@ -36,8 +36,8 @@ function getById($id){
 
 function create ($customer) {
 	$query = conn()->prepare(
-		"INSERT INTO customers (name, last_name, email, age, phone_number, city, address, country, zip)
-		 VALUES (:name, :last_name, :email, :age, :phone_number, :city, :address, :country, :zip)"
+		"INSERT INTO customers (name, last_name, email, age, phone_number, city, address, country, zip, product_id)
+		 VALUES (:name, :last_name, :email, :age, :phone_number, :city, :address, :country, :zip, :productId)"
 	);
 
 	try {
@@ -51,6 +51,7 @@ function create ($customer) {
 			"address" => $customer["inputAddress"],
 			"country" => $customer["inputCountry"],
 			"zip" => $customer["inputZip"],
+			"productId" => $customer["inputProduct"]
 		]);
 		return [true];
 	} catch (PDOException $e) {
