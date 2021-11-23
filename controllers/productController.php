@@ -37,8 +37,14 @@ function getProduct($request) {
 	require_once VIEWS . "/product/product.php";
 }
 
+function updateProduct() {
+	echo 'updating product...';
+	require_once VIEWS . "/product/product.php";
+}
+
 function createProduct() {
-	echo 'creating product...';
+	
+	require_once VIEWS . "/product/product.php";
 }
 
 function error($errorMsg) {
