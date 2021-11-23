@@ -23,10 +23,6 @@ function getAllProducts() {
 	}
 }
 
-function deleteProduct($id) {
-	echo 'Deleting...' . $id;
-}
-
 function getProduct($request) {
 	$action = $request["id"];
 	$product = null;
@@ -37,9 +33,16 @@ function getProduct($request) {
 	require_once VIEWS . "/product/product.php";
 }
 
-function updateProduct() {
-	echo 'updating product...';
-	require_once VIEWS . "/product/product.php";
+function updateProduct($request) {
+	$action = $request["action"];
+
+	if(sizeof($_POST) > 0) {
+		$product = update($_POST);
+
+		if($product[0]) {
+			header("Location: index.php?controller=product&action=getAllProducts");
+		}
+	}
 }
 
 function createProduct($request) {
@@ -50,11 +53,19 @@ function createProduct($request) {
 
 		if($product[0]) {
 			header("Location: index.php?controller=product&action=getAllProducts");
-		}
-		print_r($_POST);
-		
+		}	
 	}
 	require_once VIEWS . "/product/product.php";
+}
+
+function deleteProduct($request) {
+	$action = $request["action"];
+	$product = null;
+
+	if(isset($request["id"])) {
+		$product = delete($request["id"]);
+		header("Location: index.php?controller=product&action=getAllProducts");
+	}
 }
 
 function error($errorMsg) {

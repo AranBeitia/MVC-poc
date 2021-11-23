@@ -51,3 +51,40 @@ function create($product) {
 		return [false, $e];
 	}
 }
+
+function update($product) {
+	$query = conn()->prepare(
+		"UPDATE products SET name = :name, 
+			category = :category,
+			price = :price,
+			stock = :stock
+		WHERE id = :id"
+		);
+
+	try {
+		$query->execute([
+			"name" => $product["inputName"],
+			"category" => $product["inputCategory"],
+			"price" => $product["inputPrice"],
+			"stock" => $product["inputStock"],
+			"id" => $product["inputId"],
+		]);
+		return [true];
+	} catch (PDOException $e) {
+		return [false, $e];
+	}
+}
+
+function delete($id) {
+	$query = conn()->prepare(
+		"DELETE from products
+		 WHERE id = $id"
+	);
+
+	try {
+		$query->execute();
+		return [true];
+	} catch (PDOException $e) {
+		return [false, $e];
+	}
+}
