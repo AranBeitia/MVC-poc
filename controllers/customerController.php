@@ -45,35 +45,28 @@ function getCustomer($request) {
   require_once VIEWS . "/customer/customer.php";
 }
 
-function updateCustomer($request)
-{
-    $action = $request["action"];
-    echo 'viene de func update... <br/>';
+function updateCustomer($request) {
+  $action = $request["action"];
 
-    if (sizeof($_POST) > 0) {
-      // print_r($_POST);
-      echo '<br>';
-      $customer = update($_POST);
-      // print_r($customer);
-      //header("Location: index.php?controller=customer&action=getAllCustomers");
+  if (sizeof($_POST) > 0) {
+    $customer = update($_POST);
 
-        // if ($customer[0]) {
-        //     header("Location: index.php?controller=customer&action=getAllCustomers");
-        // } else {
-        //     $customer = $_POST;
-        //     $error = "The data entered is incorrect, check that there is no other hobbie with that email.";
-        //     require_once VIEWS . "/customer/customer.php";
-        // }
+    if($customer[0]) {
+      header("Location: index.php?controller=customer&action=getAllCustomers");
     } else {
-        require_once VIEWS . "/customer/customer.php";
+      $customer = $_POST;
+      $error = "The data entered is incorrect";
+      require_once VIEWS . "/customer/customer.php";
     }
+
+  } else {
+      require_once VIEWS . "/customer/customer.php";
+  }
 }
 
 function createCustomer($request) {
   $action = $request["action"];
-  echo 'viene de func create...';
-  $id=$_GET["id"];
-  echo $id;
+
   if(sizeof($_POST) > 0) {
     $customer = create($_POST);
 

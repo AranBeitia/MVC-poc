@@ -37,21 +37,21 @@ function getById($id){
 function create ($customer) {
 	$query = conn()->prepare(
 		"INSERT INTO customers (name, last_name, email, age, phone_number, city, address, country, zip)
-		 VALUES (?,?,?,?,?,?,?,?,?);"
+		 VALUES (:name, :last_name, :email, :age, :phone_number, :city, :address, :country, :zip)"
 	);
 
-	$query->bindParam(1, $customer["name"]);
-	$query->bindParam(2, $customer["last_name"]);
-	$query->bindParam(3, $customer["email"]);
-	$query->bindParam(4, $customer["age"]);
-	$query->bindParam(5, $customer["phone_number"]);
-	$query->bindParam(6, $customer["city"]);
-	$query->bindParam(7, $customer["address"]);
-	$query->bindParam(8, $customer["country"]);
-	$query->bindParam(9, $customer["zip"]);
-
 	try {
-		$query->execute();
+		$query->execute([
+			"name" => $customer["inputName"],
+			"last_name" => $customer["inputLastName"],
+			"email" => $customer["inputEmail"],
+			"age" => $customer["inputAge"],
+			"phone_number" => $customer["inputPhoneNumber"],
+			"city" => $customer["inputCity"],
+			"address" => $customer["inputAddress"],
+			"country" => $customer["inputCountry"],
+			"zip" => $customer["inputZip"],
+		]);
 		return [true];
 	} catch (PDOException $e) {
 		return [false, $e];
@@ -59,29 +59,33 @@ function create ($customer) {
 }
 
 function update($customer) {
-	print_r($customer);
 	$query = conn()->prepare(
 		"UPDATE customers
-		 SET name = ?, last_name = ?, email = ?,  age = ?, phone_number = ?, city = ?, address = ?, country = ?, zip = ?
-		 WHERE id = ?"
+		 SET name = :name, 
+		 last_name = :last_name, 
+		 email = :email,  
+		 age = :age, 
+		 phone_number = :phone_number, 
+		 city = :city, 
+		 address = :address, 
+		 country = :country, 
+		 zip = :zip
+		 WHERE id = :id"
 	);
 
-	$query->bindParam(1, $customer["inputName"]);
-	$query->bindParam(2, $customer["inputLastName"]);
-	$query->bindParam(3, $customer["inputEmail"]);
-	$query->bindParam(4, $customer["inputAge"]);
-	$query->bindParam(5, $customer["inputPhoneNumber"]);
-	$query->bindParam(6, $customer["inputCity"]);
-	$query->bindParam(7, $customer["inputAddress"]);
-	$query->bindParam(8, $customer["inputCountry"]);
-	$query->bindParam(9, $customer["inputZip"]);
-	$query->bindParam(10, $customer["inputId"]);
-
 	try {
-		$query->execute();
-		// echo preg_replace('?', $username, $result->queryString);
-		echo $query->queryString;
-
+		$query->execute([
+			"name" => $customer["inputName"],
+			"last_name" => $customer["inputLastName"],
+			"email" => $customer["inputEmail"],
+			"age" => $customer["inputAge"],
+			"phone_number" => $customer["inputPhoneNumber"],
+			"city" => $customer["inputCity"],
+			"address" => $customer["inputAddress"],
+			"country" => $customer["inputCountry"],
+			"zip" => $customer["inputZip"],
+			"id" => $customer["inputId"]
+		]);
 		return [true];
 	} catch (PDOException $e) {
 		echo $e-> getMessage();
@@ -92,9 +96,8 @@ function update($customer) {
 function delete($id) {
 	$query = conn()->prepare(
 		"DELETE from customers
-		 WHERE id = ?" 
+		 WHERE id = $id" 
 	);
-	$query->bindParam(1, $id);
 
 	try {
 		$query->execute();
