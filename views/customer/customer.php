@@ -10,39 +10,94 @@
 <body>
 	<main class="container">
 		<h1>Customer page</h1>
-		<form class="row g-3" action='?controller=customer&action=<?php echo isset($customer["id"]) ? "updateCustomer":"createCustomer" ?>' method="post">
+		<?php 
+			if($action == "getCustomer" && (!isset($customer) || !$customer  || sizeof($customer) == 0)) {
+				echo "<p>The customer doesnt exist</p>";
+			} else if (isset($error)){
+				echo "<p>$error</p>";
+			}
+		?>
+		<form 
+			class="row g-3" 
+			action='?controller=customer&action=<?php echo isset($customer["id"]) ? "updateCustomer":"createCustomer" ?>' 
+			method="post"
+		>
+			<input type="hidden" name="inputId" value="<?= isset($customer["id"]) ? $customer["id"] : null?>">
 			<div class="col-md-6">
 				<label for="inputName" class="form-label">Name</label>
-				<input type="text" class="form-control" id="inputName" value="<?php echo isset($customer["name"]) ? $customer["name"] : null ?>">
+				<input 
+					type="text" 
+					class="form-control" 
+					id="inputName"
+					name="inputName" 
+					value="<?php echo isset($customer["name"]) ? $customer["name"] : null ?>"
+				>
 			</div>
+			
 			<div class="col-md-6">
 				<label for="inputLastName" class="form-label">Last Name</label>
-				<input type="text" class="form-control" id="inputLastName" value="<?php echo isset($customer["last_name"]) ? $customer["last_name"] : null ?>">
+				<input 
+					type="text" 
+					class="form-control" 
+					id="inputLastName"
+					name="inputLastName"
+					value="<?php echo isset($customer["last_name"]) ? $customer["last_name"] : null ?>"
+				>
 			</div>
 			<div class="col-md-2">
 				<label for="inputAge" class="form-label">Age</label>
-				<input type="number" class="form-control" id="inputAge" value="<?php echo isset($customer["age"]) ? $customer["age"]: null ?>">
+				<input 
+					type="number" 
+					class="form-control" 
+					id="inputAge" 
+					name="inputAge"
+					value="<?php echo isset($customer["age"]) ? $customer["age"]: null ?>"
+				>
 			</div>
 			<div class="col-md-4">
 				<label for="inputPhoneNumber" class="form-label">Phone number</label>
-				<input type="number" class="form-control" id="inputPhoneNumber" value="<?php echo isset($customer["phone_number"]) ? $customer["phone_number"]: null ?>">
+				<input 
+					type="number" 
+					class="form-control" 
+					id="inputPhoneNumber"
+					name="inputPhoneNumber"
+					value="<?php echo isset($customer["phone_number"]) ? $customer["phone_number"]: null ?>"
+				>
 			</div>
 			<div class="col-md-6">
 				<label for="inputEmail" class="form-label">Email</label>
-				<input type="email" class="form-control" id="inputEmail" value="<?php echo isset($customer["email"]) ? $customer["email"]: null ?>">
+				<input 
+					type="email" 
+					class="form-control" 
+					id="inputEmail" 
+					name="inputEmail"
+					value="<?php echo isset($customer["email"]) ? $customer["email"]: null ?>"
+				>
 			</div>
 			<div class="col-6">
 				<label for="inputAddress" class="form-label">Address</label>
-				<input type="text" class="form-control" id="inputAddress" value="<?php echo isset($customer["address"]) ? $customer["address"]: null ?>">
+				<input 
+					type="text" 
+					class="form-control" 
+					id="inputAddress"
+					name="inputAddress"
+					value="<?php echo isset($customer["address"]) ? $customer["address"]: null ?>"
+				>
 			</div>
 
 			<div class="col-md-6">
 				<label for="inputCity" class="form-label">City</label>
-				<input type="text" class="form-control" id="inputCity" value="<?php echo isset($customer["city"]) ? $customer["city"]: null ?>">
+				<input 
+					type="text" 
+					class="form-control" 
+					id="inputCity" 
+					name="inputCity"
+					value="<?php echo isset($customer["city"]) ? $customer["city"]: null ?>"
+				>
 			</div>
 			<div class="col-md-4">
 				<label for="inputCountry" class="form-label">Country</label>
-				<select id="inputCountry" class="form-select">
+				<select id="inputCountry" name="inputCountry" class="form-select">
 					<option selected>Choose...</option>
 					<option value="England" <?php echo isset($customer["country"]) && $customer["country"] === "England" ? "selected" : null ?>>England</option>
 					<option value="France" <?php echo isset($customer["country"]) && $customer["country"] === "France" ? "selected" : null ?>>France</option>
@@ -51,7 +106,7 @@
 			</div>
 			<div class="col-md-2">
 				<label for="inputZip" class="form-label">Zip</label>
-				<input type="text" class="form-control" id="inputZip" value="<?php echo isset($customer["zip"]) ? $customer["zip"] : null ?>">
+				<input type="text" class="form-control" id="inputZip" name="inputZip" value="<?php echo isset($customer["zip"]) ? $customer["zip"] : null ?>">
 			</div>
 			<div class="col-12">
 				<button type="submit" class="btn btn-dark">Submit</button>

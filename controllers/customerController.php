@@ -45,28 +45,55 @@ function getCustomer($request) {
   require_once VIEWS . "/customer/customer.php";
 }
 
-function updateCustomer($request) {
-  $action = $request["action"];
+function updateCustomer($request)
+{
+    $action = $request["action"];
+    echo 'viene de func update... <br/>';
 
+    if (sizeof($_POST) > 0) {
+      // print_r($_POST);
+      echo '<br>';
+      $customer = update($_POST);
+      // print_r($customer);
+      //header("Location: index.php?controller=customer&action=getAllCustomers");
+
+        // if ($customer[0]) {
+        //     header("Location: index.php?controller=customer&action=getAllCustomers");
+        // } else {
+        //     $customer = $_POST;
+        //     $error = "The data entered is incorrect, check that there is no other hobbie with that email.";
+        //     require_once VIEWS . "/customer/customer.php";
+        // }
+    } else {
+        require_once VIEWS . "/customer/customer.php";
+    }
+}
+
+function createCustomer($request) {
+  $action = $request["action"];
+  echo 'viene de func create...';
+  $id=$_GET["id"];
+  echo $id;
   if(sizeof($_POST) > 0) {
-    $customer = update($_POST);
+    $customer = create($_POST);
 
     if($customer[0]) {
       header("Location: index.php?controller=customer&action=getAllCustomers");
     } else {
-      $customer = $_POST;
-      $error = "Data incorrect";
-      require_once VIEWS . "/customer/customer.php";
+      echo $customer[1];
     }
-
-  } else {
-    require_once VIEWS . "/customer/customer.php";
   }
+  require_once VIEWS . "/customer/customer.php";
 }
 
-function createCustomer() {
-  echo 'viene de func create...';
-  require_once VIEWS . "/customer/customer.php";
+function deleteCustomer($request) {
+  $action = $request["action"];
+  $customer = null;
+
+  if(isset($request["id"])) {
+    $customer = delete($request["id"]);
+    header("Location: index.php?controller=customer&action=getAllCustomers");
+  }
 }
 
 /**
