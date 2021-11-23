@@ -42,8 +42,18 @@ function updateProduct() {
 	require_once VIEWS . "/product/product.php";
 }
 
-function createProduct() {
+function createProduct($request) {
+	$action = $request["action"];
 	
+	if(sizeof($_POST) > 0) {
+		$product = create($_POST);
+
+		if($product[0]) {
+			header("Location: index.php?controller=product&action=getAllProducts");
+		}
+		print_r($_POST);
+		
+	}
 	require_once VIEWS . "/product/product.php";
 }
 

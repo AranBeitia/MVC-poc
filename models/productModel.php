@@ -32,3 +32,22 @@ function getById($id) {
 		return [];
 	}
 }
+
+function create($product) {
+	$query = conn()->prepare(
+		"INSERT into products (name, category, price, stock)
+		 VALUES (:name, :category, :price, :stock)"
+	);
+
+	try {
+		$query->execute([
+			"name" => $product["inputName"],
+			"category" => $product["inputCategory"],
+			"price" => $product["inputPrice"],
+			"stock" => $product["inputStock"]
+		]);
+		return [true];
+	} catch (PDOException $e) {
+		return [false, $e];
+	}
+}
